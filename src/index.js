@@ -8,7 +8,7 @@ const port = 3000
 
 async function main() {
     try {
-        await models.sequelize.sync({ alter: true })
+        await models2.sequelize.sy({ alter: true })
         await sequelizeConnection.authenticate();
         console.log(`Connection has been established successsfuly`);
         app.listen(port)

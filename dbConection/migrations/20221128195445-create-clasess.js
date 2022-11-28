@@ -2,12 +2,21 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('RolPeople', {
+    await queryInterface.createTable('clasesses', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      },
+      date_class: {
+        type: Sequelize.DATEONLY
+      },
+      note: {
+        type: Sequelize.INTEGER
+      },
+      hour: {
+        type: Sequelize.TIME
       },
       createdAt: {
         allowNull: false,
@@ -20,6 +29,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('RolPeople');
+    await queryInterface.dropTable('clasesses');
   }
 };
