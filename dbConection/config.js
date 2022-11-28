@@ -9,15 +9,15 @@ module.exports = {
   "test": {
     "username": "postgres",
     "password": "root",
-    "database": "academia",
-    "host": "127.0.0.1",
+    "database": "academia_ejm",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
     "password": "root",
-    "database": "academia",
-    "host": "127.0.0.1",
+    "database": "academia_ejm",
+    "host": "localhost",
     "dialect": "postgres"
   }
 }

@@ -1,9 +1,10 @@
 'use strict';
-
+const { sequelizeConnection } = require('../../src/connecion/connecion.js')
 const fs = require('fs');
 const path = require('path');
-const Sequelize = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 const process = require('process');
+
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config.js')[env];
@@ -31,6 +32,7 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
+//ojo 
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

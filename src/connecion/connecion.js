@@ -1,7 +1,7 @@
 
 const Sequelize = require('sequelize')
 
- const sequelize = new Sequelize(
+ const sequelizeConnection = new Sequelize(
 'academia_ejm',
 'postgres',
 'root', {
@@ -10,5 +10,5 @@ dialect: 'postgres'
 })
 
 module.exports={
-    sequelize,
+    sequelizeConnection,
 }
