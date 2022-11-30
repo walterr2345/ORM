@@ -21,6 +21,7 @@ function initModels(sequelize) {
   const roles = _roles(sequelize, DataTypes);
   const topic_class = _topic_class(sequelize, DataTypes);
   const topics = _topics(sequelize, DataTypes);
+  
 
   classes.belongsToMany(topics, { as: 'id_topic_topics', through: topic_class, foreignKey: "id_class", otherKey: "id_topic" });
   persons.belongsToMany(persons, { as: 'id_person_ht_people', through: htrainer_trainee, foreignKey: "id_person_tr", otherKey: "id_person_ht" });
