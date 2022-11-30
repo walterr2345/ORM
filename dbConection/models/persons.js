@@ -10,11 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // htrainer_trainee.belongsTo(persons, { as: "id_person_tr_person", foreignKey: "id_person_tr"});
-      // persons.hasMany(htrainer_trainee, { as: "htrainer_trainees", foreignKey: "id_person_tr"});
-      // htrainer_trainee.belongsTo(persons, { as: "id_person_ht_person", foreignKey: "id_person_ht"});
-      // persons.hasMany(htrainer_trainee, { as: "id_person_ht_htrainer_trainees", foreignKey: "id_person_ht"});
-      // module_group.belongsTo(persons, { as: "id_person_mt_person", foreignKey: "id_person_mt"});
+      models.persons.belongsToMany(models.persons, { as: 'id_person_ht_people', through: models.htrainer_trainee, foreignKey: "id_person_tr", otherKey: "id_person_ht" });
+      models.persons.belongsToMany(models.persons, { as: 'id_person_tr_people', through: models.htrainer_trainee, foreignKey: "id_person_ht", otherKey: "id_person_tr" });
     }
   }
   persons.init({
