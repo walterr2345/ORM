@@ -5,5 +5,5 @@ const router = express.Router()
 
 router
     .get('/persons', personsController.getPersons)
-
+    .post('/persons', personsController.createPerson)
 module.exports = router

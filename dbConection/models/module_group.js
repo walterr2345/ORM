@@ -28,10 +28,10 @@ module.exports = (sequelize, DataTypes) => {
       models.module_group.belongsTo(models.groups, { as: "id_group_group", foreignKey: "id_group"});
 
 
-      models.classes.belongsTo(models.module_group, { as: "id_group_module_group", foreignKey: "id_group"});
+      models.classes.belongsTo(models.module_group, { foreignKey: "id_group"});
       models.classes.belongsTo(models.module_group, { foreignKey: "id_module"});
-      models.classes.belongsTo(models.module_group, { as: "id_person_mt_module_group", foreignKey: "id_person_mt"});
-      models.classes.belongsTo(models.module_group, { as: "id_person_tr_module_group", foreignKey: "id_person_tr"});
+      models.classes.belongsTo(models.module_group, { foreignKey: "id_person_mt"});
+      models.classes.belongsTo(models.module_group, {  foreignKey: "id_person_tr"});
 
     }
   }
