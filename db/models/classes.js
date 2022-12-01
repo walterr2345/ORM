@@ -16,7 +16,7 @@ class classes extends Sequelize.Model {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'module_group',
+        model: 'module_groups',
         key: 'id_person_tr'
       }
     },
@@ -24,7 +24,7 @@ class classes extends Sequelize.Model {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'module_group',
+        model: 'module_groups',
         key: 'id_person_tr'
       }
     },
@@ -40,7 +40,7 @@ class classes extends Sequelize.Model {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'module_group',
+        model: 'module_groups',
         key: 'id_person_tr'
       }
     },

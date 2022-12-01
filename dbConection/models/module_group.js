@@ -10,32 +10,28 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      
-      models.persons.hasMany(models.module_group, {
 
+      models.persons.hasMany(models.module_group, {
         foreignKey: "id_person_mt"
       });
       models.persons.hasMany(models.module_group, {
         foreignKey: "id_person_tr"
       });
       models.modules.hasMany(models.module_group, {
-
         foreignKey: "id_module"
       });
-      models.module_group.belongsTo(models.persons, {  foreignKey: "id_person_tr"});
-      models.module_group.belongsTo(models.persons, { foreignKey: "id_person_mt"});
-      models.module_group.belongsTo(models.persons, {  foreignKey: "id_person_mt"});
-      models.module_group.belongsTo(models.groups, { as: "id_group_group", foreignKey: "id_group"});
 
-
-      models.classes.belongsTo(models.module_group, { foreignKey: "id_group"});
-      models.classes.belongsTo(models.module_group, { foreignKey: "id_module"});
-      models.classes.belongsTo(models.module_group, { foreignKey: "id_person_mt"});
-      models.classes.belongsTo(models.module_group, {  foreignKey: "id_person_tr"});
-
+      models.module_group.hasMany(models.classes, { foreignKey: "id_person_tr" });
+      models.module_group.hasMany(models.classes, { foreignKey: "id_person_mt" });
+      models.module_group.hasMany(models.classes, { foreignKey: "id_module" });
+      models.module_group.hasMany(models.classes, { foreignKey: "id_group" });
     }
   }
   module_group.init({
+    id_module: { type: DataTypes.INTEGER, primaryKey: true },
+    id_group: { type: DataTypes.INTEGER, primaryKey: true },
+    id_person_mt: { type: DataTypes.INTEGER, primaryKey: true },
+    id_person_tr: { type: DataTypes.INTEGER, primaryKey: true },
     start_date: DataTypes.DATEONLY,
     end_date: DataTypes.DATEONLY
   }, {
