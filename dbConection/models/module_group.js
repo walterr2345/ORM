@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "id_person_mt"
       });
       models.persons.hasMany(models.module_group, {
-        as: "id_person_tr_module_groups",
         foreignKey: "id_person_tr"
       });
       models.modules.hasMany(models.module_group, {
@@ -26,6 +25,14 @@ module.exports = (sequelize, DataTypes) => {
       models.module_group.belongsTo(models.persons, {  foreignKey: "id_person_tr"});
       models.module_group.belongsTo(models.persons, { foreignKey: "id_person_mt"});
       models.module_group.belongsTo(models.persons, {  foreignKey: "id_person_mt"});
+      models.module_group.belongsTo(models.groups, { as: "id_group_group", foreignKey: "id_group"});
+
+
+      models.classes.belongsTo(models.module_group, { as: "id_group_module_group", foreignKey: "id_group"});
+      models.classes.belongsTo(models.module_group, { foreignKey: "id_module"});
+      models.classes.belongsTo(models.module_group, { as: "id_person_mt_module_group", foreignKey: "id_person_mt"});
+      models.classes.belongsTo(models.module_group, { as: "id_person_tr_module_group", foreignKey: "id_person_tr"});
+
     }
   }
   module_group.init({
