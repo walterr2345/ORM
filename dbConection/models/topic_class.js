@@ -10,11 +10,23 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.clasess.belongsToMany(models.topics, {
-         as: 'id_topic_topics', 
-         through: topic_class, 
-         foreignKey: "id_class", 
-         otherKey: "id_topic" });
+
+      models.classes.belongsToMany(models.topics, {
+        as: 'id_topic_topics',
+        through: models.topic_class,
+        foreignKey: "id_class",
+        otherKey: "id_topic"
+      }
+      );
+
+      models.topics.belongsToMany(models.classes, {
+        as: 'id_class_classes',
+        through: models.topic_class,
+        foreignKey: "id_topic",
+        otherKey: "id_class"
+      }
+      );
+
     }
   }
   topic_class.init({

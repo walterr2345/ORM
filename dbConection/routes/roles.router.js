@@ -1,20 +1,9 @@
-// import { project } from '../models/projects.js'
+const express = require("express")
+const personsController = require('../controllers/persons.controller.js')
 
-// export const getProjects = async (req, res) => {
-//    const projects = await project.findAll()
-//    console.log(projects);
-//    res.send('projects')
-// }
+const router = express.Router()
 
-// export const createProjects = async (req, res) => {
-//     const { name, priority, description } = req.body
+router
+    .get('/persons', personsController.getPersons)
 
-//     const newProject = await project.create({
-//         name,
-//         priority,
-//         description
-//     })
-//     console.log(newProject);
-//     res.send(`creating proyects`)
-// }
-
+module.exports = router

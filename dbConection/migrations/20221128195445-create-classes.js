@@ -3,11 +3,27 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('clasesses', {
-      id: {
-        allowNull: false,
+      id_class: {
         autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true
+      },
+      id_person_mt: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'module_group',
+          key: 'id_person_tr'
+        }
+      },
+      id_person_tr: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'module_group',
+          key: 'id_person_tr'
+        }
       },
       date_class: {
         type: Sequelize.DATEONLY

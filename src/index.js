@@ -2,9 +2,12 @@ const express = require('express')
 const { sequelizeConnection } = require('../src/connecion/connecion.js')
 const models = require('../dbConection/models');
 const models2 = require('../db/models')
+const  personsRoute = require('./../dbConection/routes/roles.router.js')
 
 const app = express()
 const port = 3000
+
+app.use(personsRoute)
 
 async function main() {
     try {
