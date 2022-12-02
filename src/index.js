@@ -11,7 +11,7 @@ app.use(personsRoute)
 
 async function main() {
     try {
-        await models.sequelize.sync({ alter: true })
+        // await models.sequelize.sync({ alter: true })
         await sequelizeConnection.authenticate();
         console.log(`Connection has been established successsfuly`);
         app.listen(port)
