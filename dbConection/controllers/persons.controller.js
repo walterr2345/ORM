@@ -3,20 +3,25 @@ const models = require("../../dbConection/models");
 const getModulesByTrainee = async (req, res) => {
     try {
         const person = await models.persons.findAll(
-            // {
-            //     attributes: ['first_name', 'last_name', 'rol_name', 'name_module'],
-            //     model: models.module_groups,
-            //     where: {
-            //         id_person_tr: req.params.id
-            //     }
-            // }
+            {
+                attributes: ['first_name', 'last_name'],
+                include: {
+                    model: models.module_group,
+                    include: [
+                        models.modules,
+                    ],
+                    where: {
+                        id_person_tr: req.params.id
+                    }
+                },
+            }
         )
-        res.send(person)
+        res.status(200).send({ data: person })
     } catch (error) {
-
+        console.log(`Something go wrong ${error}`);
+        res.status(500).send(`${error}`)
     }
 }
-
 
 // select p.first_name, p.last_name, r.rol_name as Rol, m.name_module as Modulo
 // from persons as p 
@@ -47,10 +52,16 @@ const getHeadTrainerByTrainee = async (req, res) => {
 // select p.first_name , p.last_name 
 // from persons as p
 // join htrainer_trainees as ht on (p.id =ht.id_person_ht)
-// where ht.id_person_tr  =2
+// where ht.id_person_tr  = 2
 
 const getModuleTrainerByModule = async (req, res) => {
-
+    try {
+        const person = await models.persons.findAll()
+        res.status(200).send({ data: person })
+    } catch (error) {
+        console.log(`Something go wrong ${error}`);
+        res.status(500).send(`${error}`)
+    }
 }
 
 // select distinct  p.first_name, p.last_name, r.rol_name 
@@ -62,8 +73,32 @@ const getModuleTrainerByModule = async (req, res) => {
 // where mg.id_module =1
 
 const getExistsTraineesByModule = async (req, res) => {
+    try {
+        const person = await models.persons.findAll({
+            attributes: ['first_name', 'last_name'],
+            include: {
+                model: models.rol_person,
+                include: [
+                    models.roles,
+                    // include: {
+                    //     model: models.module_groups,
+                    //     where: {
+                    //         id: req.params.id,
+                    //         id_module: null
+                    //     }
+                    // }
 
+                ],
+                required: false
+            },
+        })
+        res.status(200).send({ data: person })
+    } catch (error) {
+        console.log(`Something go wrong ${error}`);
+        res.status(500).send(`${error}`)
+    }
 }
+
 // select p.first_name, p.last_name, r.rol_name as Rol
 // from persons p 
 // join rol_people as rp on  (p.id= rp.id_persona)
@@ -73,7 +108,15 @@ const getExistsTraineesByModule = async (req, res) => {
 //  and mg.id_module is null
 
 const getExistsModuleTrainerByModule = async (req, res) => {
-
+    try {
+        const person = await models.persons.query(
+            `           select p.first_name, p.last_name, r.rol_name as Rol from persons p join rol_people as rp on  (p.id= rp.id_persona)join roles as r on (rp.id_rol =r.id) left  join  module_groups as mg on (p.id = mg.id_person_mt) where r.id  = 3 and mg.id_module is null`
+        )
+        res.status(200).send({ data: person })
+    } catch (error) {
+        console.log(`Something go wrong ${error}`);
+        res.status(500).send(`${error}`)
+    }
 }
 
 // select p.first_name, p.last_name, r.rol_name as Rol
@@ -84,26 +127,9 @@ const getExistsModuleTrainerByModule = async (req, res) => {
 // where r.id  = 3
 //  and mg.id_module is null
 
-const getClassStartDateByTrainee = async (req, res) => {
-    try {
-        const date = await models.Class.min('date_class', {
-            include: {
-                attributes: [],
-                model: models.Classes_Trainee,
-                where: {
-                    id_trainee: req.params.id
-                },
-                group: ['id_trainee'],
-            },
-        })
-        res.status(200).send({ data: date })
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 
 module.exports = {
     getModulesByTrainee,
-    getHeadTrainerByTrainee
+    getHeadTrainerByTrainee,
+    getExistsTraineesByModule
 }

@@ -3,7 +3,8 @@ const personsController = require('../controllers/persons.controller.js')
 
 const router = express.Router()
 router
-    .get('/persons', personsController.getModulesByTrainee)
+    .get('/persons/:id', personsController.getModulesByTrainee)
     .get('/persons/HeadTrainer/:id', personsController.getHeadTrainerByTrainee)
-    // .post('/persons', personsController.createPerson)
+    .get('/persons/ModuleTrainerGetClass/:id',personsController.getExistsTraineesByModule)
+
 module.exports = router
